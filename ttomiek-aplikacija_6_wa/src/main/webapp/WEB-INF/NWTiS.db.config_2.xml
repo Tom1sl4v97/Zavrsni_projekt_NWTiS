@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>NWTIS konfiguracija</comment>
+<entry key="server.database">jdbc:mysql://localhost:3306/</entry>
+<entry key="admin.username">nwtis_admin</entry>
+<entry key="admin.password">nwtis_foi</entry>
+<entry key="admin.database">nwtis_g4</entry>
+<entry key="user.username">nwtis_g4</entry>
+<entry key="user.password">nwtis#g4</entry>
+<entry key="user.database">nwtis_g4?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true</entry>
+<entry key="jdbc.mysql">com.mysql.jdbc.Driver</entry>
+<entry key="jdbc.derby">org.apache.derby.jdbc.ClientDriver</entry>
+<entry key="jdbc.hsqldb.hsql">org.hsqldb.jdbcDriver</entry>
+
+<entry key="LocationIQ.token">pk.888b5d067c21c296f8688ef08066e17f</entry>
+<entry key="ciklus.spavanje">300</entry>
+</properties>

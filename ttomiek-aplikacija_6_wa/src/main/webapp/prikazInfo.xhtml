@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"    
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Pregled informacija</title>
+        <h:outputStylesheet library="css" name="default.css"  /> 
+        <script type="text/javascript">
+	        var wsocket;
+	        function connect() {
+	            wsocket = new WebSocket(
+	                    "ws://localhost:9090/ttomiek-aplikacija_5/info");
+	            wsocket.onmessage = onMessage;
+	        }
+	        function onMessage(evt) {
+	            var porukaServeraWA1 = evt.data;
+	            document.getElementById("porukaServera").innerHTML = porukaServeraWA1;
+	        }
+	        function osvjeziStranicu() {
+	            wsocket.send("info");
+	        }
+	
+	        window.addEventListener("load", connect, false);
+	    </script>
+    </h:head>
+    <h:body>
+        <h2>Pregled informacija</h2>
+        <h:link outcome="index.xhtml" value="Početna"/><br/><br/>
+      	<br/>
+      	<h:commandButton onclick="osvjeziStranicu()" value="Osvježi stranicu" />
+      	<br/>
+      	<div id="porukaServera"></div>
+      	<br/><br/><br/>
+      	<h:dataTable value="#{aerodromiWs.dajAerodromePreuzimanja}" var="a"
+                     styleClass="authorTable"
+                     headerClass="authorTableHeader"
+                     rowClasses="authorTableOddRow,authorTableEvenRow">
+	        <h:column>
+	            <f:facet name="header">
+	                <h:outputText value="ICAO" />
+	            </f:facet>
+	            <h:outputText value="#{a.icao}" />
+	        </h:column>  
+	        <h:column>
+	            <f:facet name="header">
+	                <h:outputText value="Naziv" />
+	            </f:facet>
+	            <h:outputText value="#{a.naziv}" />
+	        </h:column>  
+	        <h:column>
+	            <f:facet name="header">
+	                <h:outputText value="Država" />
+	            </f:facet>
+	            <h:outputText value="#{a.drzava}" />
+	        </h:column>  
+      	</h:dataTable>
+      	
+      	<br/><br/><br/>
+      	
+      	<h:form id="forma">
+	        <h:outputLabel value="Icao kod aerodroma: ">
+            	<h:inputText id="postavi1" value="#{aerodromiWs.icao}"/>
+	        </h:outputLabel>
+	        <br/><br/>
+	         <h:outputLabel value="Vrijeme od: ">
+            	<h:inputText id="postavi2" value="#{aerodromiWs.vrijemeOd}"/>
+	        </h:outputLabel>
+	        <br/><br/>
+	         <h:outputLabel value="Vrijeme do: ">
+            	<h:inputText id="postavi3" value="#{aerodromiWs.vrijemeDo}"/>
+	        </h:outputLabel>
+	        <br/><br/>
+	        
+	
+			<br/><br/>
+			<h:commandButton value="Dohvati sa formato datuma dd.MM.yyyy" action="#{aerodromiWs.dohvatiPolaskeDan}" style="margin-right: 20px;">
+	            <f:ajax execute="forma" render="forma:container"/>
+	        </h:commandButton>
+	        
+	        <h:commandButton value="Dohvati sa formatom u sekundama" action="#{aerodromiWs.dohvatiPolaskeVrijeme}">
+	            <f:ajax execute="forma" render="forma:container"/>
+	        </h:commandButton>
+	
+	        <br/><br/>
+	        
+	        <h:panelGroup layout="block" id="container">
+	        	<h:dataTable value="#{aerodromiWs.dajPolaske}" var="a"
+                     styleClass="authorTable"
+                     headerClass="authorTableHeader"
+                     rowClasses="authorTableOddRow,authorTableEvenRow">
+		            <h:column>
+		                <f:facet name="header">
+		                    <h:outputText value="Polaziste" />
+		                </f:facet>
+		                <h:outputText value="#{a.estDepartureAirport}" />
+		            </h:column>  
+		            <h:column>
+		                <f:facet name="header">
+		                    <h:outputText value="Vrijeme leta" />
+		                </f:facet>
+		                <h:outputText value="#{a.firstSeen}" />
+		            </h:column>  
+		            <h:column>
+		                <f:facet name="header">
+		                    <h:outputText value="Dolazište" />
+		                </f:facet>
+		                <h:outputText value="#{a.estArrivalAirport}" />
+		            </h:column>
+		            <h:column>
+		                <f:facet name="header">
+		                    <h:outputText value="Vrijeme sljetanja" />
+		                </f:facet>
+		                <h:outputText value="#{a.lastSeen}" />
+		            </h:column>  
+	        	</h:dataTable>
+			</h:panelGroup>
+      	</h:form>
+      	
+      	
+    </h:body>
+</html> 

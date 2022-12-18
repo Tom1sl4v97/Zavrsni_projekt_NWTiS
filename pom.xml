@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.foi.nwtis.ttomiek</groupId>
+	<artifactId>ttomiek-projekt</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	<name>ttomiek-projekt</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+	</properties>
+	<modules>
+		
+		<module>ttomiek-projekt_lib_03_1</module>
+		<module>ttomiek-projekt_lib_06_1</module>
+		<module>ttomiek-aplikacija_1</module>
+		<module>ttomiek-aplikacija_2</module>
+		<module>ttomiek-aplikacija_3</module>
+		<module>ttomiek-aplikacija_4</module>
+		<module>ttomiek-aplikacija_5</module>
+		<module>ttomiek-aplikacija_6_wa</module>
+	</modules>
+
+</project>

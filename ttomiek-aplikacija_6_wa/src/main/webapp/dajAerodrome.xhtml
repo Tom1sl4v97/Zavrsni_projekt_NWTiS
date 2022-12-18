@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"    
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Pregled aerdoroma</title>
+        <h:outputStylesheet library="css" name="default.css"  /> 
+    </h:head>
+    <h:body>
+        <h2>Pregled svih aerdoroma</h2>
+        <h:link outcome="index.xhtml" value="Početna"/><br/><br/>
+        
+        <h:form id="forma">
+	        <h:outputLabel value="Icao kod aerodroma: ">
+            	<h:inputText id="postavi" value="#{aerodromiWs.icao}"/>
+	        </h:outputLabel>
+	        <br/><br/>
+	        <h:commandButton value="Dodaj aerodrom" action="#{aerodromiWs.dodajAerodrom}">
+	            <f:ajax execute="postavi" render="forma:container"/>
+	        </h:commandButton>
+	
+			<br/><br/>
+			<h:commandButton value="Dohvati za sve aerodrome" action="#{aerodromiWs.dohvatiSveAerodrome}" style="margin-right: 20px;">
+	            <f:ajax execute="postavi" render="forma:container"/>
+	        </h:commandButton>
+	        
+	        <h:commandButton value="Dohvati za pracene aerodrome" action="#{aerodromiWs.dohvatiPraceneAerodrome}">
+	            <f:ajax execute="postavi" render="forma:container"/>
+	        </h:commandButton>
+	
+	        <br/><br/>
+	        
+	        <h:panelGroup layout="block" id="container">
+	        	<h:dataTable value="#{aerodromiWs.dajSveAerodrome}" var="a"
+                     styleClass="authorTable"
+                     headerClass="authorTableHeader"
+                     rowClasses="authorTableOddRow,authorTableEvenRow">
+		            <h:column>
+		                <f:facet name="header">
+		                    <h:outputText value="ICAO" />
+		                </f:facet>
+		                <h:outputText value="#{a.icao}" />
+		            </h:column>  
+		            <h:column>
+		                <f:facet name="header">
+		                    <h:outputText value="Naziv" />
+		                </f:facet>
+		                <h:outputText value="#{a.naziv}" />
+		            </h:column>  
+		            <h:column>
+		                <f:facet name="header">
+		                    <h:outputText value="Država" />
+		                </f:facet>
+		                <h:outputText value="#{a.drzava}" />
+		            </h:column>  
+		        </h:dataTable>
+			</h:panelGroup>
+      	</h:form>
+      	
+        <br />
+    </h:body>
+</html> 
